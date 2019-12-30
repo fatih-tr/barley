@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <!-- TensorFlow.js script -->
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@0.13.5"></script>
+<script> alert("Model ve seçtiğiniz resim yüklendikten sonra tahmin et tuşuna basınız."); </script>
+<script
+ src="https://code.jquery.com/jquery-3.3.1.js"
+ integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+ crossorigin="anonymous"></script>
+
+<!-- main script -->
+<!--<script src = "main.js" > </script> -->
+<script src = "test.js" > </script>
+<!-- <script src = "main.css" > </script> -->
+</head>
+<body>
+    
+<h1 align="center">DEEP LEARNING TABANLI KİNOA SINIFLANDIRICI</h1>   
+<h4 align="center" id ='status' >Model Yükleniyor... </h4> 
+<div class="container-fluid"> 
+
+<blockquote class="blockquote text-justify" style="margin:30px;">
+ <p align="center"> Bu sınıflandırıcı ile 10 adet sınıfta kinoa tohumları sınıflandırılabilir. Model 91.6% doğruluk oranında kinoa görüntülerinden sınıf tahmini yapabilmektedir.     
+ </p>
+    <footer class="blockquote-footer"></footer>
+  </blockquote>
+
+</div>
+    
+<div>
+<font face="Tahoma" size="8" color="red">
+<p id = "Result" align="center"></p>
+</font>
+</div>
+    
+</div>
+<script>
+  $(function(){
+    $("input[type='Submit']").click(function(){
+        var $fileUpload = $("input[type='file']");
+        if (parseInt($fileUpload.get(0).files.length)>1){
+         alert("You can only upload a maximum of 1 files");
+        }
+    });
+});
+    
+ async function foo(){
+    model = await tf.loadModel('model2/model.json')
+    document.getElementById('status').innerHTML = 'Model Yüklendi';
+ }
+
+ function loadDemoImage() {
+	//document.getElementById("predict-box").style.display = "table-cell";
+  	//document.getElementById("prediction").innerHTML = "Click predict to find my label!";
+	//document.getElementById("select-file-box").style.display = "table-cell";
+	//document.getElementById("list").innerHTML = "";
+	document.getElementById("Result").innerHTML = " ";
+	base_path = "dataset/test/test_image_"
+	maximum = 10;
+	minimum = 1;
+	var randomnumber = Math.floor(Math.random() * (maximum - minimum + 1)) + minimum;
+	img_path = base_path + randomnumber + ".jpg"
+	console.log(img_path);
+	var img = new Image();
+    	img.src = img_path;
+	 
+	const canvas = document.getElementById('canvas');
+	const ctx = canvas.getContext('2d');
+	 img.onload = function(){
+   		ctx.drawImage(img, 1, 1, 299, 299);
+ 	 };
+	 
+	 
+	//var span = document.createElement('span');
+        // span.innerHTML = ['<img class="thumb" src="', img_path,
+        //                   '" title="', img_path, '"/>'].join('');
+        // document.getElementById('list').insertBefore(span, null);
+
+}   
+    
+ function clearFileInput(id) 
+{ 
+    var oldInput = document.getElementById(id); 
+
+    var newInput = document.createElement("input"); 
+
+    newInput.type = "file"; 
+    newInput.id = oldInput.id; 
+    newInput.name = oldInput.name; 
+    newInput.className = oldInput.className; 
+    newInput.style.cssText = oldInput.style.cssText; 
+    // TODO: copy any other relevant attributes 
+
+    oldInput.parentNode.replaceChild(newInput, oldInput); 
+}    
+</script>   
+<p align="center">
+<button id="demo-image-button" class="input-button" onclick="loadDemoImage()">Veritabanından rastgele resim yükle</button>
+<input type="file" id="files" name="files[]" accept=".jpg, .jpeg, .png"/>
+    <!-- <output id="list"> -->
+
+	<canvas id="canvas" width="299" height="299"></canvas>
+	
+    <!-- </output> -->
+<button type="button" value="Submit" onclick = "start()">Tahmin Et</button> 
+</p>
+<script>
+clearFileInput("files");
+</script>    
+    
+<script> 
+  
+ function handleFileSelect(evt) {
+   //document.getElementById("list").innerHTML = "";
+   document.getElementById("Result").innerHTML = " ";
+   var files = evt.target.files; // FileList object
+   // Loop through the FileList and render image files as thumbnails.
+   for (var i = 0, f; f = files[i]; i++) {
+
+     // Only process image files.
+     if (!f.type.match('image.*')) {
+       continue;
+     }
+
+     var reader = new FileReader();
+
+     // Closure to capture the file information.
+     reader.onload = (function(theFile) {
+       return function(e) {
+         // Render thumbnail.
+	 
+	 
+         //var span = document.createElement('span');
+         //span.innerHTML = ['<img class="thumb" src="', e.target.result,
+         //                  '" title="', escape(theFile.name), '"/>'].join('');
+         //document.getElementById('list').insertBefore(span, null);
+       };
+     })(f);
+
+     // Read in the image file as a data URL.
+     reader.readAsDataURL(f);
+   }
+ }
+ foo()
+ document.getElementById('files').addEventListener('change', handleFileSelect, false);
+</script>
+	
+	
+
+
+<!-- <input type="file"  id="myfile">	-->
+<div style="display:none;">
+  	<img id="source" width="299" height="299">
+	<img src="https://hitcounter.pythonanywhere.com/count/tag.svg" alt="Hits">
+</div>		
+	
+<script>	
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+image = document.getElementById("source");
+	
+
+ctx.drawImage(image, 1, 1, 600, 600, 0, 0, 299, 299);
+
+function readURL() {
+          var myimg = document.getElementById("source");
+          var input = document.getElementById("files");
+          if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+            console.log("changed");
+              myimg.src = e.target.result;
+              drawimg(e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+          }
+}
+
+document.querySelector('#files').addEventListener('change',function(){
+    readURL()
+});
+
+function drawimg(idata) {
+  var img = new Image();
+  img.onload = function(){
+    ctx.drawImage(img, 1, 1, 600, 600, 0, 0, 299, 299);
+  };
+  img.src = idata;
+}
+	</script>	
+	
+	
+
+	
+</body>
+</html>
