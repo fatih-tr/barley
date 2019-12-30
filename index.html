@@ -69,7 +69,7 @@
 	const canvas = document.getElementById('canvas');
 	const ctx = canvas.getContext('2d');
 	 img.onload = function(){
-   		ctx.drawImage(img, 1, 1, 299, 299);
+   		ctx.drawImage(img, 1, 1, 504, 378);
  	 };
 	 
 	 
@@ -101,7 +101,7 @@
 <input type="file" id="files" name="files[]" accept=".jpg, .jpeg, .png"/>
     <!-- <output id="list"> -->
 
-	<canvas id="canvas" width="299" height="299"></canvas>
+	<canvas id="canvas" width="504" height="378"></canvas>
 	
     <!-- </output> -->
 <button type="button" value="Submit" onclick = "start()">Tahmin Et</button> 
@@ -162,7 +162,7 @@ const ctx = canvas.getContext('2d');
 image = document.getElementById("source");
 	
 
-ctx.drawImage(image, 1, 1, 600, 600, 0, 0, 299, 299);
+ctx.drawImage(image, 1, 1, 600, 600, 0, 0, 504, 378);
 
 function readURL() {
           var myimg = document.getElementById("source");
@@ -185,7 +185,7 @@ document.querySelector('#files').addEventListener('change',function(){
 function drawimg(idata) {
   var img = new Image();
   img.onload = function(){
-    ctx.drawImage(img, 1, 1, 600, 600, 0, 0, 299, 299);
+    ctx.drawImage(img, 1, 1, 600, 600, 0, 0, 504, 378);
   };
   img.src = idata;
 }
