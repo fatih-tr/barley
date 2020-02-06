@@ -66,7 +66,7 @@ function preprocess(img)
 {
 	console.log(img.height)	
 	if(img.height>600 && img.width>600) {
-		img.height=384
+		img.height=378
 		img.width=504
 	}
  	console.log(img.height)
@@ -121,7 +121,7 @@ async function start(){
         
 	var canvas = document.getElementById('canvas');
     	var ctx = canvas.getContext("2d");
-    	var img = ctx.getImageData(1, 1, 384, 504);
+    	var img = ctx.getImageData(1, 1, 504, 378);
     	//alert("Width of imgData is: " + img.width);
     	//ctx.putImageData(img, 10, 70);
 	
