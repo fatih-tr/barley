@@ -69,7 +69,8 @@
 	const canvas = document.getElementById('canvas');
 	const ctx = canvas.getContext('2d');
 	 img.onload = function(){
-   		ctx.drawImage(img, 1, 1, 378, 504);
+//    		ctx.drawImage(img, 1, 1, 378, 504);
+		ctx.drawImage(img, 1, 1, 256, 256);
  	 };
 	 
 	 
@@ -102,7 +103,7 @@
     <!-- <output id="list"> -->
 
 	<canvas id="canvas" width="504" height="378"></canvas>
-	
+	<canvas id="canvas" width="256" height="256"></canvas>
     <!-- </output> -->
 <button type="button" value="Submit" onclick = "start()">Predict</button> 
 </p>
