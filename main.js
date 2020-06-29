@@ -160,7 +160,7 @@ async function start(img) {
     
     Validate(img)
     //load the model 
-    model = await tf.loadModel('model2/model.json')
+    model = await tf.loadModel('model3/model.json')
         
     document.getElementById('status').innerHTML = 'Model Yüklendi';
         
