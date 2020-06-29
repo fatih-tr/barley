@@ -92,7 +92,7 @@ function preprocess(img)
 get the prediction 
 */
 function predict(imgData) {
-        var class_names = ['İnia 431 Altpleno', 'Black Negra Collena', 'Hvalhvas', 'Kankolla', 'RedRojo', 'Salcedo', 'İnia Santa Ana', 'Yellow Armerilla Demorongoni', 'Yelow Armerilla SacoCO', 'İlpainia'] 
+        var class_names = ['Akar','Başgül','Burakbey','Bülbül89','Çetin2000','Durusu','Efes98','Erciyes','Özen','Tarm-92','Tosunpaşa','Yalın','Yıldız','Zeynelağa'] 
         //get the prediction 
         var pred = model.predict(preprocess(imgData)).dataSync()
         console.log(pred)            
@@ -126,7 +126,7 @@ async function start(){
     	//ctx.putImageData(img, 10, 70);
 	
 	
-        model = await tf.loadModel('model2/model.json')
+        model = await tf.loadModel('model3/model.json')
         
         var status = document.getElementById('status')
       
