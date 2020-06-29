@@ -69,6 +69,8 @@ function preprocess(img)
 		img.height=378
 		img.width=504
 	}
+	img.height=256
+	img.width=256
  	console.log(img.height)
     //convert the image data to a tensor 
 	
