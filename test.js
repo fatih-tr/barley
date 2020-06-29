@@ -65,10 +65,10 @@ function findIndicesOfMax(inp, count) {
 function preprocess(img)
 {
 	console.log(img.height)	
-	if(img.height>600 && img.width>600) {
-		img.height=378
-		img.width=504
-	}
+// 	if(img.height>600 && img.width>600) {
+// 		img.height=378
+// 		img.width=504
+// 	}
 	img.height=256
 	img.width=256
  	console.log(img.height)
@@ -123,7 +123,8 @@ async function start(){
         
 	var canvas = document.getElementById('canvas');
     	var ctx = canvas.getContext("2d");
-    	var img = ctx.getImageData(1, 1, 504, 378);
+//     	var img = ctx.getImageData(1, 1, 504, 378);
+	var img = ctx.getImageData(1, 1, 256, 256);
     	//alert("Width of imgData is: " + img.width);
     	//ctx.putImageData(img, 10, 70);
 	
@@ -147,8 +148,3 @@ async function start(){
         predict(img)
          
         }
-   
-
-					
-
-					  
